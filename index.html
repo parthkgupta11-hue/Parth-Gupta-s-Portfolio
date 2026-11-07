@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Parth Gupta's project portfolio: TSA, 3D prints, Oxmaint AI robotics and personal builds.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Parth Gupta Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&amp;family=DM+Sans:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+/* Layout: sticky navy nav, navy hero band, a home view with four category cards and a skills band.
+   Each category is its own view, switched by the URL hash (#tsa, #prints, #oxmaint, #personal).
+   Large projects are full-width blocks with the image beside the text; the 3D print page also has a card grid. */
+:root {
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --bg: #f5f8fa;
+  --fg: #243446;
+  --fg-strong: #0d1f35;
+  --muted: #5a6a7b;
+  --card: #ffffff;
+  --border: #dce3ea;
+  --chip-bg: #edf2f6;
+  --chip-fg: #3f5063;
+  --accent: #16808f;
+  --accent-soft: rgba(22, 128, 143, 0.09);
+  --band: #0d1f35;
+  --band-2: #152a45;
+  --band-fg: #f4f7fa;
+  --band-muted: #9eb0c4;
+  --band-accent: #2cc0d6;
+  --band-line: rgba(255, 255, 255, 0.1);
+  --sheet: #f1f4f7;
+  --ph-bg: #e8eef3;
+  --ph-line: #b8c6d3;
+  --shadow: 0 18px 40px rgba(13, 31, 53, 0.12);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1522;
+    --fg: #cfdbe7;
+    --fg-strong: #f1f5f9;
+    --muted: #93a4b6;
+    --card: #12243a;
+    --border: #22394f;
+    --chip-bg: #1a3048;
+    --chip-fg: #b5c5d6;
+    --accent: #3fc4d9;
+    --accent-soft: rgba(63, 196, 217, 0.12);
+    --band: #060f1a;
+    --band-2: #0e2036;
+    --band-fg: #f1f5f9;
+    --band-muted: #93a4b6;
+    --band-accent: #3fc4d9;
+    --band-line: rgba(255, 255, 255, 0.09);
+    --sheet: #dfe5ea;
+    --ph-bg: #0f2034;
+    --ph-line: #2f4963;
+    --shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0a1522;
+  --fg: #cfdbe7;
+  --fg-strong: #f1f5f9;
+  --muted: #93a4b6;
+  --card: #12243a;
+  --border: #22394f;
+  --chip-bg: #1a3048;
+  --chip-fg: #b5c5d6;
+  --accent: #3fc4d9;
+  --accent-soft: rgba(63, 196, 217, 0.12);
+  --band: #060f1a;
+  --band-2: #0e2036;
+  --band-fg: #f1f5f9;
+  --band-muted: #93a4b6;
+  --band-accent: #3fc4d9;
+  --band-line: rgba(255, 255, 255, 0.09);
+  --sheet: #dfe5ea;
+  --ph-bg: #0f2034;
+  --ph-line: #2f4963;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-family: var(--sans); font-size: 16px; line-height: 1.6; color: var(--fg); background: var(--bg); overflow-x: hidden; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--band); z-index: 30; }
+h1, h2, h3, p, ul, dl, dd, figure { margin: 0; }
+ul { padding: 0; list-style: none; }
+h1, h2, h3 { text-wrap: balance; }
+img { display: block; max-width: 100%; height: auto; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.band :focus-visible, .nav :focus-visible { outline-color: var(--band-accent); }
+
+.wrap { max-width: 1100px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.band { background: var(--band); color: var(--band-fg); }
+
+/* NAV */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; background: var(--band); border-bottom: 1px solid var(--band-line); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 56px; }
+.brand { font-family: var(--serif); font-size: 1.15rem; color: var(--band-fg); text-decoration: none; white-space: nowrap; }
+.brand span { color: var(--band-accent); }
+.nav-links { display: flex; gap: 1.4rem; list-style: none; margin: 0; padding: 0; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a { color: var(--band-muted); text-decoration: none; font-size: 0.76rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; white-space: nowrap; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--band-accent); }
+
+/* HERO */
+.hero { padding-block: 4.5rem 4rem; text-align: center; background: linear-gradient(rgba(44, 192, 214, 0.07) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, rgba(44, 192, 214, 0.07) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(135deg, var(--band) 0%, var(--band-2) 100%); }
+.eyebrow { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--band-accent); margin-bottom: 1.2rem; }
+.hero h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(3rem, 9vw, 5.5rem); line-height: 1.05; margin-bottom: 0.6rem; color: var(--band-fg); }
+.hero h1 em { color: var(--band-accent); }
+.hero-sub { font-size: clamp(1rem, 2.5vw, 1.25rem); font-weight: 300; color: var(--band-muted); margin-bottom: 0; }
+.pills { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; max-width: 46rem; margin: 0 auto; }
+.pills li { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--band-accent); background: rgba(44, 192, 214, 0.12); border: 1px solid rgba(44, 192, 214, 0.35); border-radius: 2rem; padding: 0.35rem 0.85rem; }
+
+/* SECTIONS */
+.sec { padding-block: 4.5rem; scroll-margin-top: calc(56px + env(safe-area-inset-top, 0px)); }
+.label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+.band .label { color: var(--band-accent); }
+.title { font-family: var(--serif); font-weight: 500; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.15; color: var(--fg-strong); margin-bottom: 1rem; }
+.band .title { color: var(--band-fg); }
+.lede { color: var(--muted); font-weight: 300; max-width: 36rem; margin-bottom: 2.5rem; }
+.band .lede { color: var(--band-muted); }
+
+/* HOME CATEGORY CARDS */
+.cats { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .cats { grid-template-columns: 1fr 1fr; } }
+.cat { display: flex; flex-direction: column; min-width: 0; text-decoration: none; color: inherit; background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s; }
+.cat:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--accent); }
+.cat .media { aspect-ratio: 16 / 10; }
+.cat .body { padding: 1.3rem 1.4rem 1.5rem; }
+.cat h3 { font-family: var(--serif); font-weight: 500; font-size: 1.4rem; line-height: 1.25; color: var(--fg-strong); margin-bottom: 0.4rem; }
+.cat p.d { font-size: 0.92rem; color: var(--muted); margin-bottom: 1rem; }
+.go { font-size: 0.85rem; font-weight: 500; color: var(--accent); }
+
+/* SHARED PROJECT PARTS */
+.tag { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+.bullets { list-style: none; margin: 0 auto 1rem; padding: 0; max-width: 34rem; text-align: left; display: grid; gap: 0.45rem; font-size: 0.9rem; line-height: 1.5; color: var(--fg); }
+.bullets li { position: relative; padding-left: 1.1rem; }
+.bullets li::before { content: ""; position: absolute; left: 0.1rem; top: 0.62em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.bullets li > ul { list-style: none; margin: 0.4rem 0 0.1rem; padding: 0; display: grid; gap: 0.2rem; font-size: 0.86rem; color: var(--muted); }
+.bullets li > ul li { padding-left: 1rem; }
+.bullets li > ul li::before { width: 6px; height: 0; top: 0.78em; border-radius: 0; background: none; border-top: 1.5px solid var(--accent); }
+.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+.chips li { font-family: var(--mono); font-size: 0.65rem; color: var(--chip-fg); background: var(--chip-bg); border: 1px solid var(--border); border-radius: 4px; padding: 0.2rem 0.55rem; }
+.result { font-size: 0.84rem; font-weight: 500; color: var(--fg-strong); background: var(--accent-soft); border-radius: 6px; padding: 0.55rem 0.8rem; }
+.result b { display: block; font-family: var(--mono); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.1rem; }
+
+/* MEDIA: photo, drawing sheet or image slot */
+.media { display: flex; flex-direction: column; background: var(--ph-bg); min-width: 0; }
+.media:has(> .shot.sheet) { background: #fff; }
+.shot { display: block; flex: 1; width: 100%; min-height: 220px; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.shot img { width: 100%; height: 100%; object-fit: cover; }
+.shot.sheet { background: #fff; }
+.shot.sheet img { object-fit: contain; }
+.thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 0.4rem; padding: 0.4rem; background: var(--card); border-top: 1px solid var(--border); }
+.thumbs .shot { min-height: 0; aspect-ratio: 4 / 3; }
+.ph { flex: 1; min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem; padding: 1rem; text-align: center; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); background: repeating-linear-gradient(135deg, var(--ph-bg) 0 12px, transparent 12px 13px), var(--ph-bg); }
+.ph b { font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); background: var(--ph-bg); padding: 0 0.4rem; }
+.ph span { background: var(--ph-bg); padding: 0 0.4rem; }
+
+.clip { display: flex; justify-content: center; background: #0b1522; }
+.clip video { display: block; width: 100%; max-height: 520px; object-fit: contain; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; flex: 1; min-width: 0; }
+.pair > * { min-width: 0; }
+.pair .shot { min-height: 260px; }
+.pair video { display: block; width: 100%; height: 100%; min-height: 260px; object-fit: cover; background: #0b1522; }
+.quad { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; flex: 1; min-width: 0; background: var(--border); }
+.quad figure { grid-column: span 2; display: flex; flex-direction: column; min-width: 0; margin: 0; background: var(--card); }
+.quad.r1 { grid-template-columns: 1fr 1fr; }
+.quad.r1 figure { grid-column: auto; }
+.quad.r1 figure.wide { grid-column: 1 / -1; }
+.quad .shot.portrait { aspect-ratio: 3 / 4; }
+.quad.r1 video { aspect-ratio: 3 / 4; object-fit: contain; }
+.quad .grp { grid-column: 1 / -1; margin: 0; padding: 0.55rem 0.75rem; background: var(--card); font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); border-top: 1px solid var(--border); }
+.quad figure.half { grid-column: span 3; }
+.quad figure.wide { grid-column: 1 / -1; }
+@media (max-width: 520px) { .quad figure { grid-column: span 3; } .quad figure.full { grid-column: 1 / -1; } }
+.quad .wide video { aspect-ratio: 8 / 3; object-fit: contain; }
+.quad .shot, .quad video { flex: none; display: block; width: 100%; min-height: 0; aspect-ratio: 4 / 3; background: var(--ph-bg); }
+.quad .shot.sheet { background: #fff; }
+.quad video { aspect-ratio: 3 / 4; object-fit: cover; background: #0b1522; }
+.quad .wide.land video, .quad.r1 .wide.land video { aspect-ratio: 16 / 9; object-fit: contain; }
+.quad figcaption { padding: 0.5rem 0.75rem; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.cap { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--card); border-top: 1px solid var(--border); font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.cap span { padding: 0.5rem 0.75rem; }
+.card .media { overflow: hidden; }
+.card .shot, .card .pair .shot { min-height: 0; position: relative; }
+.card .shot img { position: absolute; inset: 0; }
+.thumbs.lg { grid-template-columns: repeat(2, 1fr); }
+.thumbs.lg .shot { aspect-ratio: 3 / 4; }
+.thumbs.tri { grid-template-columns: repeat(3, 1fr); }
+.thumbs.tri .shot { aspect-ratio: 4 / 3; }
+.thumbs.sq { grid-template-columns: repeat(4, 1fr); }
+.thumbs.sq .shot { aspect-ratio: 1; }
+.shot.fit img { object-fit: contain; }
+
+/* CENTERED TEXT */
+.sec .wrap > .label, .sec .wrap > .title, .sec .wrap > .lede, .view-head { text-align: center; }
+.sec .wrap > .lede, .view-head .lede { margin-inline: auto; }
+.cat .body, .block .body, .card .body { text-align: center; }
+.cat .body, .block .body, .card .body { align-items: stretch; }
+.block .d, .card .d, .cat p.d { margin-inline: auto; }
+.chips { justify-content: center; }
+
+.skillgrid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .skillgrid { grid-template-columns: 1fr 1fr; } }
+.skillbox { min-width: 0; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem 1.5rem; text-align: center; }
+.skillbox h3 { font-family: var(--serif); font-weight: 500; font-size: 1.3rem; line-height: 1.25; color: var(--fg-strong); margin-bottom: 1rem; }
+.skillbox .chips { margin-bottom: 0; }
+.skillbox .chips li { font-size: 0.72rem; padding: 0.3rem 0.65rem; }
+.hero.slim { padding-block: 3rem 3.25rem; }
+.hero.slim .back { color: var(--band-accent); margin-bottom: 1.25rem; }
+.hero.slim h1 { font-size: clamp(2.6rem, 7vw, 4rem); }
+.skillbox { background: linear-gradient(135deg, var(--band) 0%, var(--band-2) 100%); border-color: var(--band-line); color: var(--band-fg); }
+.skillbox h3 { color: var(--band-fg); }
+.skillbox .chips li { font-size: 0.72rem; color: var(--band-accent); background: rgba(44, 192, 214, 0.12); border: 1px solid rgba(44, 192, 214, 0.35); border-radius: 2rem; padding: 0.3rem 0.8rem; }
+@media (max-width: 520px) { .brand { display: none; } .nav .wrap { justify-content: center; } .nav-links { gap: 0.9rem; } .nav-links a { font-size: 0.68rem; letter-spacing: 0.05em; } }
+
+/* PAGE TRANSITIONS */
+@keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+@keyframes sweep { 0% { transform: scaleX(0); opacity: 1; } 70% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+.sweep { position: fixed; left: 0; right: 0; top: calc(56px + env(safe-area-inset-top, 0px)); height: 3px; z-index: 45; background: linear-gradient(90deg, transparent, var(--band-accent) 30%, var(--band-accent) 70%, transparent); transform-origin: left center; transform: scaleX(0); opacity: 0; pointer-events: none; }
+.sweep.go { animation: sweep 0.75s cubic-bezier(0.65, 0, 0.35, 1); }
+.view:not([hidden]) { animation: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
+.view:not([hidden]) .hero .wrap > *, .view:not([hidden]) .view-head > *, .view:not([hidden]) .sec .wrap > .title, .view:not([hidden]) .sec .wrap > .lede,
+.view:not([hidden]) :is(.stack, .cats, .cards, .skillgrid) > * { animation: rise 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
+.view:not([hidden]) .hero .wrap > :nth-child(2), .view:not([hidden]) .view-head > :nth-child(2) { animation-delay: 0.06s; }
+.view:not([hidden]) .hero .wrap > :nth-child(3), .view:not([hidden]) .view-head > :nth-child(3), .view:not([hidden]) .sec .wrap > .lede { animation-delay: 0.12s; }
+.view:not([hidden]) .hero .wrap > :nth-child(4), .view:not([hidden]) .view-head > :nth-child(4) { animation-delay: 0.18s; }
+.view:not([hidden]) :is(.stack, .cats, .cards, .skillgrid) > :nth-child(1) { animation-delay: 0.15s; }
+.view:not([hidden]) :is(.stack, .cats, .cards, .skillgrid) > :nth-child(2) { animation-delay: 0.23s; }
+.view:not([hidden]) :is(.stack, .cats, .cards, .skillgrid) > :nth-child(3) { animation-delay: 0.31s; }
+.view:not([hidden]) :is(.stack, .cats, .cards, .skillgrid) > :nth-child(n+4) { animation-delay: 0.39s; }
+@media (prefers-reduced-motion: reduce) { .view:not([hidden]), .view:not([hidden]) * { animation: none !important; } .sweep { display: none; } }
+
+/* CURTAIN: icon transition into a page */
+.curtain { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.6rem; background: radial-gradient(ellipse at 50% 42%, var(--band-2) 0%, var(--band) 72%); opacity: 0; visibility: hidden; pointer-events: none; }
+.curtain.on { visibility: visible; opacity: 1; pointer-events: auto; animation: curtainIn 0.3s ease both; }
+.curtain.on.out { opacity: 0; animation: curtainOut 0.5s ease both; pointer-events: none; }
+@keyframes curtainIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes curtainOut { from { opacity: 1; } to { opacity: 0; } }
+.curtain-icons { width: min(46vmin, 280px); aspect-ratio: 1; display: grid; place-items: center; color: var(--band-accent); filter: drop-shadow(0 0 14px rgba(44, 192, 214, 0.45)); }
+.curtain-icons svg { display: none; width: 100%; height: 100%; }
+.curtain-icons { display: flex; align-items: center; justify-content: center; }
+.curtain-icons svg { flex: none; }
+.curtain-icons .logo { display: none; max-width: none; flex: none; }
+.curtain-icons .logo.i-tsa { width: min(80vw, 480px); height: auto; }
+.curtain-icons .logo.i-oxmaint { height: min(46vmin, 290px); width: auto; }
+@property --trace { syntax: "<angle>"; inherits: false; initial-value: 372deg; }
+.curtain.on .logo {
+  -webkit-mask-image: conic-gradient(from 0deg at 50% 50%, #000 calc(var(--trace) - 10deg), transparent var(--trace));
+  mask-image: conic-gradient(from 0deg at 50% 50%, #000 calc(var(--trace) - 10deg), transparent var(--trace));
+  animation: logoTrace 0.95s 0.15s cubic-bezier(0.45, 0, 0.2, 1) both;
+}
+@keyframes logoTrace { from { --trace: 0deg; } to { --trace: 372deg; } }
+.curtain[data-for="tsa"] .i-tsa, .curtain[data-for="prints"] .i-prints, .curtain[data-for="oxmaint"] .i-oxmaint, .curtain[data-for="personal"] .i-personal, .curtain[data-for="skills"] .i-skills { display: block; }
+.curtain .d { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.curtain.on .d { animation: drawLine 0.95s 0.15s cubic-bezier(0.45, 0, 0.2, 1) both; }
+@keyframes drawLine { to { stroke-dashoffset: 0; } }
+.curtain-label { margin: 0; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--band-muted); }
+.curtain-label span { display: none; }
+.curtain[data-for="tsa"] .l-tsa, .curtain[data-for="prints"] .l-prints, .curtain[data-for="oxmaint"] .l-oxmaint, .curtain[data-for="personal"] .l-personal, .curtain[data-for="skills"] .l-skills { display: inline; }
+.curtain.on .curtain-label { animation: rise 0.6s 0.45s ease backwards; }
+@media (prefers-reduced-motion: reduce) { .curtain { display: none; } }
+
+/* SUBPAGES */
+.view-head { padding-block: 3.5rem 1rem; }
+.back { display: inline-block; font-size: 0.85rem; font-weight: 500; color: var(--accent); text-decoration: none; margin-bottom: 1.5rem; }
+.back:hover { text-decoration: underline; text-underline-offset: 3px; }
+.view-head .lede { margin-bottom: 0; }
+.stack { display: grid; gap: 1.75rem; padding-block: 2.5rem 5rem; }
+
+.block { display: grid; grid-template-columns: minmax(0, 1fr); background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.block .body { padding: 1.6rem; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.block h3, .card h3 { font-family: var(--serif); font-weight: 500; font-size: 1.55rem; line-height: 1.25; color: var(--fg-strong); margin-bottom: 0.5rem; }
+.block .d, .card .d { font-size: 0.95rem; color: var(--muted); margin-bottom: 1rem; max-width: 34rem; }
+@media (min-width: 900px) {
+  .block { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+  .block.flip .media { order: 2; }
+  .block .body { padding: 2.25rem; }
+}
+.cards { display: grid; gap: 1.75rem; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .cards { grid-template-columns: 1fr 1fr; } }
+.card { display: flex; flex-direction: column; min-width: 0; background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.card .media { aspect-ratio: 4 / 3; }
+.card .body { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; flex: 1; }
+.card h3 { font-size: 1.3rem; }
+.card .result { margin-top: auto; }
+
+/* SKILLS */
+.skills { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+@media (min-width: 520px) { .skills { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .skills { grid-template-columns: repeat(4, 1fr); } }
+.skill { min-width: 0; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--band-line); border-radius: 10px; padding: 1.4rem; }
+.skill h3 { font-family: var(--sans); font-weight: 600; font-size: 0.9rem; color: var(--band-fg); margin-bottom: 0.75rem; }
+.skill li { display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.82rem; color: var(--band-muted); padding: 0.2rem 0; }
+.skill li::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--band-accent); flex-shrink: 0; transform: translateY(-2px); }
+.skill li strong { color: var(--band-fg); font-weight: 500; }
+.cert { display: inline-block; margin-top: 2rem; font-family: var(--mono); font-size: 0.72rem; color: var(--band-accent); background: rgba(44, 192, 214, 0.1); border: 1px solid rgba(44, 192, 214, 0.3); border-radius: 2rem; padding: 0.4rem 0.9rem; }
+
+.foot { background: var(--band); border-top: 1px solid var(--band-line); padding-block: 1.5rem calc(1.5rem + env(safe-area-inset-bottom, 0px)); }
+.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1rem; }
+.foot p { font-family: var(--mono); font-size: 0.76rem; color: var(--band-muted); }
+
+/* VIEWER */
+dialog { border: 0; padding: 0; background: transparent; width: min(96vw, 1400px); max-width: none; max-height: 96vh; color: var(--fg); }
+dialog::backdrop { background: rgba(6, 15, 26, 0.82); }
+.dlg { background: var(--card); padding: 0.9rem; display: grid; gap: 0.7rem; border-radius: 10px; }
+.dlg img { max-height: 78vh; width: 100%; object-fit: contain; background: #fff; }
+.dlg .bar { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: 0.85rem; }
+.dlg button { font: 500 0.85rem var(--sans); color: var(--accent); background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } .cat:hover { transform: none; } }
+</style>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#home">Parth<span> Gupta</span></a>
+    <ul class="nav-links">
+      <li><a href="#tsa">TSA</a></li>
+      <li><a href="#prints">3D Prints</a></li>
+      <li><a href="#oxmaint">Oxmaint AI</a></li>
+      <li><a href="#personal">Personal</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="curtain" id="curtain" aria-hidden="true">
+  <div class="curtain-icons">
+    <img class="logo i-tsa" src="img/tsa-outline.png" width="1774" height="876" alt="">
+    <svg class="i-prints" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect class="d" pathLength="1" x="40" y="30" width="120" height="140" rx="8"/><path class="d" pathLength="1" d="M40 60 H160"/><rect class="d" pathLength="1" x="88" y="52" width="24" height="16" rx="2"/><path class="d" pathLength="1" d="M94 68 L100 80 L106 68"/><rect class="d" pathLength="1" x="50" y="150" width="100" height="8" rx="2"/><path class="d" pathLength="1" d="M100 110 L118 120 V140 L100 150 L82 140 V120 Z"/><path class="d" pathLength="1" d="M82 120 L100 130 L118 120"/><path class="d" pathLength="1" d="M100 130 V150"/></svg>
+    <img class="logo i-oxmaint" src="img/oxmaint-outline.png" width="914" height="1005" alt="">
+    <svg class="i-personal" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle class="d" pathLength="1" cx="100" cy="38" r="16"/><path class="d" pathLength="1" d="M78 62 H122 Q134 62 134 74 V112 Q134 118 128 118 Q122 118 122 112 V80 H118 V168 Q118 174 112 174 Q106 174 106 168 V118 H94 V168 Q94 174 88 174 Q82 174 82 168 V80 H78 V112 Q78 118 72 118 Q66 118 66 112 V74 Q66 62 78 62 Z"/></svg>
+    <svg class="i-skills" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect class="d" pathLength="1" x="40" y="84" width="120" height="72" rx="8"/><path class="d" pathLength="1" d="M40 108 H160"/><path class="d" pathLength="1" d="M78 84 V68 Q78 60 86 60 H114 Q122 60 122 68 V84"/><rect class="d" pathLength="1" x="90" y="100" width="20" height="16" rx="3"/></svg>
+  </div>
+  <p class="curtain-label"><span class="l-tsa">TSA Projects</span><span class="l-prints">3D Prints and Fidgets</span><span class="l-oxmaint">Oxmaint AI</span><span class="l-personal">Personal Projects</span><span class="l-skills">Skills</span></p>
+</div>
+
+<div class="sweep" id="sweep" aria-hidden="true"></div>
+
+<!-- HOME -->
+<div class="view" data-view="home">
+  <header class="hero band">
+    <div class="wrap">
+      <p class="eyebrow">Engineering Portfolio · Class of 2028</p>
+      <h1>Parth <em>Gupta</em></h1>
+      <p class="hero-sub">Mechanical Design · Robotics · Electronics · Fabrication</p>
+    </div>
+  </header>
+
+  <section class="sec">
+    <div class="wrap">
+      <h2 class="title">Projects</h2>
+      <p class="lede">Competition builds, 3D prints, robot work for Oxmaint AI, and a personal electronics project.</p>
+      <div class="cats">
+        <a class="cat" href="#tsa">
+          <div class="body"><p class="tag">2 projects</p><h3>TSA Projects</h3><p class="d">Manufacturing prototype and solar sprint car.</p><span class="go">View projects →</span></div>
+        </a>
+        <a class="cat" href="#prints">
+          <div class="body"><p class="tag">6 projects</p><h3>3D Prints and Fidgets</h3><p class="d">Towers, print-in-place fidgets and mechanisms.</p><span class="go">View projects →</span></div>
+        </a>
+        <a class="cat" href="#oxmaint">
+          <div class="body"><p class="tag">5 projects</p><h3>Oxmaint AI</h3><p class="d">Robot mounts, housings and behaviors.</p><span class="go">View projects →</span></div>
+        </a>
+        <a class="cat" href="#personal">
+          <div class="body"><p class="tag">2 projects</p><h3>Personal Projects</h3><p class="d">RC firetruck with a custom ESP32 board and a servo robotic arm.</p><span class="go">View projects →</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TSA -->
+<div class="view" data-view="tsa" hidden>
+  <div class="wrap">
+    <div class="view-head">
+      <a class="back" href="#home">← All projects</a>
+      <p class="label">Competition</p>
+      <h1 class="title">TSA Projects</h1>
+      <p class="lede">Builds for the Technology Student Association.</p>
+    </div>
+    <div class="stack">
+      <article class="block">
+        <div class="media">
+          <div class="pair">
+            <button class="shot" type="button" data-full="img/puzzle-box-timer.jpg" data-title="Puzzle box with timer attached"><img src="img/puzzle-box-timer.jpg" width="1600" height="1200" alt="Laser-cut plywood tray holding black 3D printed tiles, with a black timer module attached on one side" loading="lazy"></button>
+            <video controls muted playsinline loop preload="metadata" poster="img/timer-count-poster.jpg" src="img/timer-count.mp4" aria-label="The timer module counting up on its four-digit display"></video>
+          </div>
+          <div class="thumbs sq">
+            <button class="shot" type="button" data-full="img/puzzle-box-side.jpg" data-title="Timer module beside the box"><img src="img/puzzle-box-side.jpg" width="1600" height="1200" alt="Timer module showing 00:22 next to the plywood box, which is engraved Attach The Timer Here" loading="lazy"></button>
+            <button class="shot" type="button" data-full="img/puzzle-tiles.jpg" data-title="Printed tiles"><img src="img/puzzle-tiles.jpg" width="1200" height="1600" alt="Pile of black 3D printed tiles with grooves and tabs" loading="lazy"></button>
+            <button class="shot" type="button" data-full="img/puzzle-timer-electronics.jpg" data-title="Timer electronics"><img src="img/puzzle-timer-electronics.jpg" width="1200" height="1600" alt="Arduino Nano Every wired to a four-digit display and a 9V battery" loading="lazy"></button>
+            <button class="shot" type="button" data-full="img/puzzle-box-parts.jpg" data-title="Laser-cut parts"><img src="img/puzzle-box-parts.jpg" width="1200" height="1600" alt="Laser-cut plywood box with finger joints and loose wooden strips" loading="lazy"></button>
+          </div>
+          <button class="shot sheet" type="button" style="flex:none;aspect-ratio:4/3" data-full="img/puzzle-assembly-drawing.png" data-title="Isometric assembly drawing"><img src="img/puzzle-assembly-drawing.png" width="2151" height="1521" alt="Isometric assembly drawing of the puzzle box with a numbered parts list" loading="lazy"></button>
+        </div>
+        <div class="body">
+          <p class="tag">Manufacturing · Assembly</p>
+          <h3>Manufacturing Prototype</h3>
+          <p class="d">A laser-cut plywood box holding 3D-printed puzzle tiles, with a detachable timer module.</p>
+          <ul class="bullets">
+            <li>Used laser cutters to engrave and cut the wooden shapes used for assembly</li>
+            <li>Printed pieces with clearance gaps tuned to slide easily without wobbling</li>
+            <li>Assembled the CNC-cut and printed parts into the final product</li>
+            <li>Built the timer circuit from an ESP32, a button and a 4-digit display</li>
+            <li>Documented the work log, ideation and CAD in the portfolio</li>
+            <li>State finalist, scoring 191/200 points on portfolio and product combined</li>
+          </ul>
+        </div>
+      </article>
+      <article class="block flip">
+        <div class="media">
+          <button class="shot" type="button" style="flex:none;aspect-ratio:4/3" data-full="img/solar-car-side.jpg" data-title="Solar sprint car, side view"><img src="img/solar-car-side.jpg" width="752" height="512" alt="Solar sprint car with a large solar panel mounted above a blue 3D printed chassis" loading="lazy"></button>
+          <div class="thumbs tri">
+            <button class="shot fit" type="button" data-full="img/solar-car-top.jpg" data-title="Solar sprint car, top view"><img src="img/solar-car-top.jpg" width="500" height="784" alt="Top view of the solar panel with a paper rocket flame at the rear" loading="lazy"></button>
+            <button class="shot" type="button" data-full="img/solar-diorama.jpg" data-title="Space-themed display box"><img src="img/solar-diorama.jpg" width="704" height="532" alt="Black display box with a painted comet, planets and a moon" loading="lazy"></button>
+            <button class="shot" type="button" data-full="img/solar-sign.jpg" data-title="Display lid"><img src="img/solar-sign.jpg" width="700" height="520" alt="Black display lid painted like a galaxy and labeled 1269 Denmark" loading="lazy"></button>
+          </div>
+          <button class="shot sheet" type="button" style="flex:none;aspect-ratio:4/3" data-full="img/solar-drawing.png" data-title="Solar sprint car drawing"><img src="img/solar-drawing.png" width="1870" height="1445" alt="Third-angle drawing of the solar sprint car with dimensions and a parts list" loading="lazy"></button>
+        </div>
+        <div class="body">
+          <p class="tag">Mechanical · Electrical</p>
+          <h3>Senior Solar Sprint Car</h3>
+          <p class="d">A solar and battery powered car built to size and weight limits.</p>
+          <ul class="bullets">
+            <li>Brainstormed ideas to optimize the design of a miniature high-speed solar car</li>
+            <li>Created 3D printed mounts for the solar panel and ping pong balls</li>
+            <li>Ideated ways to improve solar panel output, including reflectors and angle adjustment</li>
+            <li>Retrofitted a shoebox into a garage and carried an astronomical theme through the project</li>
+            <li>Soldered the circuitry for the car's battery and solar panel, and for the spinning planets on the shoebox</li>
+            <li>Documented CAD, work log and brainstorming in the portfolio</li>
+            <li>Achieved 7.21 s on a 20 m track</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- 3D PRINTS -->
+<div class="view" data-view="prints" hidden>
+  <div class="wrap">
+    <div class="view-head">
+      <a class="back" href="#home">← All projects</a>
+      <p class="label">Fabrication</p>
+      <h1 class="title">3D Prints and Fidgets</h1>
+      <p class="lede">Showpieces, print-in-place parts and small mechanisms.</p>
+    </div>
+    <div class="stack">
+      <article class="block">
+        <div class="media"><button class="shot" type="button" data-full="img/king-queen-towers.jpg" data-title="King and Queen Towers"><img src="img/king-queen-towers.jpg" width="1200" height="1600" alt="Two blue 3D printed towers with white arched crowns on a shared dark base" loading="lazy"></button></div>
+        <div class="body">
+          <p class="tag">Complex geometry · 3D print</p>
+          <h3>King and Queen Towers</h3>
+          <p class="d">Two layered towers with arched crowns on a shared base. My first large print.</p>
+        </div>
+      </article>
+
+      <article class="block flip">
+        <div class="media">
+          <button class="shot" type="button" style="flex:none;aspect-ratio:4/3" data-full="img/bearing-spinner.jpg" data-title="Bearing Spinner"><img src="img/bearing-spinner.jpg" width="1200" height="1600" alt="Blue 3D printed fidget spinner with a printed roller bearing in the center and black rings around it" loading="lazy"></button>
+          <div class="clip"><video controls muted playsinline loop preload="metadata" poster="img/bearing-spinner-poster.jpg" src="img/bearing-spinner.mp4" aria-label="A blue double-stacked fidget spinner being spun on a table"></video></div>
+        </div>
+        <div class="body">
+          <p class="tag">Mechanism · 3D print</p>
+          <h3>Bearing Spinner</h3>
+          <p class="d">A fidget spinner with a printed roller bearing in the center.</p>
+        </div>
+      </article>
+
+      <div class="cards">
+        <article class="card">
+          <div class="media"><button class="shot" type="button" data-full="img/reuleaux-triangle.jpg" data-title="Reuleaux Triangle"><img src="img/reuleaux-triangle.jpg" width="1526" height="1442" alt="Printed gray Reuleaux triangle inside a square frame" loading="lazy"></button></div>
+          <div class="body">
+            <p class="tag">Print-in-place</p>
+            <h3>Reuleaux Triangle</h3>
+            <p class="d">A Reuleaux triangle that spins inside a square frame, printed in place.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="media"><div class="pair">
+            <button class="shot" type="button" data-full="img/orbital-gyro.jpg" data-title="Orbital Gyro"><img src="img/orbital-gyro.jpg" width="1600" height="1200" alt="Red 3D printed gyroscope fidget with nested rings" loading="lazy"></button>
+            <button class="shot" type="button" data-full="img/gyro-rings.jpg" data-title="Orbital Gyro, three nested rings"><img src="img/gyro-rings.jpg" width="585" height="544" alt="Black, blue and white 3D printed rings nested inside each other" loading="lazy"></button>
+          </div></div>
+          <div class="body">
+            <p class="tag">Kinematics</p>
+            <h3>Orbital Gyro</h3>
+            <p class="d">Nested rings that spin freely inside each other.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="media"><button class="shot fit" type="button" data-full="img/claw-fidget.jpg" data-title="Claw Fidget"><img src="img/claw-fidget.jpg" width="685" height="766" alt="Blue, white and red 3D printed two-finger claw on a parallel linkage with rubber bands on the fingertips" loading="lazy"></button></div>
+          <div class="body">
+            <p class="tag">Mechanism</p>
+            <h3>Claw Fidget</h3>
+            <p class="d">A two-finger claw on parallel linkages, closed by a push rod, with rubber-band grip pads.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="media"><button class="shot fit" type="button" data-full="img/sword-fidget.jpg" data-title="Sword Fidget"><img src="img/sword-fidget.jpg" width="322" height="686" alt="Red and white 3D printed sword-shaped fidget with a ribbed handle" loading="lazy"></button></div>
+          <div class="body">
+            <p class="tag">Section views</p>
+            <h3>Sword Fidget</h3>
+            <p class="d">A screwing fidget with section cuts that show the internal threads.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OXMAINT -->
+<div class="view" data-view="oxmaint" hidden>
+  <div class="wrap">
+    <div class="view-head">
+      <a class="back" href="#home">← All projects</a>
+      <p class="label">Commercial robotics</p>
+      <h1 class="title">Oxmaint AI</h1>
+      <p class="lede">Mounts, housings and behaviors for Oxmaint AI's robots.</p>
+    </div>
+    <div class="stack">
+      <article class="block">
+        <div class="media"><div class="quad">
+          <p class="grp">Hardware</p>
+          <figure class="half">
+            <button class="shot" type="button" data-full="img/go2-jetson.jpg" data-title="Jetson Orin Nano and DC-DC converter on the Go2 Air"><img src="img/go2-jetson.jpg" width="1200" height="1600" style="object-position:50% 38%" alt="Jetson Orin Nano board and a DC-DC converter wired onto the back of a Unitree Go2 Air" loading="lazy"></button>
+            <figcaption>On the dog</figcaption>
+          </figure>
+          <figure class="half">
+            <button class="shot sheet" type="button" data-full="img/dog-back-plate-v2.png" data-title="Dog Back Plate v2 drawing"><img src="img/dog-back-plate-v2.png" width="2400" height="1855" alt="Engineering drawing of the Dog Back Plate v2" loading="lazy"></button>
+            <figcaption>Back plate drawing</figcaption>
+          </figure>
+          <p class="grp">Behaviors</p>
+          <figure class="half">
+            <video controls muted playsinline loop preload="metadata" poster="img/go2-line-follow-poster.jpg" src="img/go2-line-follow.mp4" aria-label="The Go2 Air following a blue tape line on the floor"></video>
+            <figcaption>Line follow</figcaption>
+          </figure>
+          <figure class="half">
+            <video controls muted playsinline loop preload="metadata" poster="img/go2-follow-me-poster.jpg" src="img/go2-follow-me.mp4" aria-label="The Go2 Air walking through a house following a person"></video>
+            <figcaption>Follow me</figcaption>
+          </figure>
+          <figure class="wide">
+            <video controls muted playsinline loop preload="metadata" poster="img/go2-car-localization-poster.jpg" src="img/go2-car-localization.mp4" aria-label="The Go2 Air orbiting a blue Tesla, with its camera view on the left and a top-down map of its estimated position relative to the car on the right"></video>
+            <figcaption>Localizing around a car</figcaption>
+          </figure>
+        </div></div>
+        <div class="body">
+          <p class="tag">Robotics · CAD · Software</p>
+          <h3>Unitree Go2 Quadruped</h3>
+          <p class="d">A custom back plate carries a Jetson Orin Nano on the Go2 Air, with ROS 2 behaviors running on top of it.</p>
+          <ul class="bullets">
+            <li>Developed 3D-printed back plates that mount to the back of the quadruped, carrying computers or serving as branding</li>
+            <li>Used computer vision, trained AI models and Isaac Sim (robot simulation software) to program the robot dog to follow lines, track people and localize around vehicles</li>
+            <li>Learned ROS 2 (Robot Operating System) to control the sensors, motors and other electronics on the robot dog</li>
+          </ul>
+        </div>
+      </article>
+      <article class="block">
+        <div class="media"><div class="quad r1">
+          <figure class="wide">
+            <button class="shot sheet" type="button" data-full="img/fanuc-camera-mount.png" data-title="FANUC 200-IC Camera Mount drawing"><img src="img/fanuc-camera-mount.png" width="2400" height="1855" alt="Engineering drawing of the FANUC 200-IC camera mount" loading="lazy"></button>
+            <figcaption>Camera mount drawing</figcaption>
+          </figure>
+          <figure class="wide">
+            <button class="shot portrait" type="button" data-full="img/fanuc-robot.jpg" data-title="FANUC LR Mate 200iC"><img src="img/fanuc-robot.jpg" width="1200" height="1600" alt="Yellow FANUC LR Mate 200iC robot arm bolted to a plywood base on a wooden pallet, with a gripper and blue air lines" loading="lazy"></button>
+            <figcaption>FANUC LR Mate 200iC</figcaption>
+          </figure>
+        </div></div>
+        <div class="body">
+          <p class="tag">Robotics · CAD</p>
+          <h3>FANUC 200-IC</h3>
+          <p class="d">Bracket that holds a camera on the wrist of a FANUC LR Mate 200iC.</p>
+          <ul class="bullets">
+            <li>Created a camera mount to hold an ELP camera as the end effector of an industrial robotic arm</li>
+            <li>Attempted to control the arm programmatically with ROS but ran into outdated firmware</li>
+          </ul>
+        </div>
+      </article>
+      <article class="block flip">
+        <div class="media"><div class="quad r1">
+          <figure>
+            <button class="shot portrait" type="button" data-full="img/unitree-r1.jpg" data-title="Unitree R1"><img src="img/unitree-r1.jpg" width="1200" height="1600" alt="White and navy Unitree R1 humanoid robot standing on a wood floor" loading="lazy"></button>
+            <figcaption>Unitree R1</figcaption>
+          </figure>
+          <figure>
+            <video controls muted playsinline loop preload="metadata" poster="img/r1-kungfu-poster.jpg" src="img/r1-kungfu.mp4" aria-label="The Unitree R1 humanoid performing kung fu style moves in a yard"></video>
+            <figcaption>Kung fu moves</figcaption>
+          </figure>
+          <figure>
+            <button class="shot sheet portrait" type="button" data-full="img/r1-head-mount.jpg" data-title="Head camera mount, CAD" ><img src="img/r1-head-mount.jpg" width="577" height="738" alt="CAD model of a camera mount sitting on top of the R1 humanoid's orange head" loading="lazy"></button>
+            <figcaption>Head camera mount (CAD)</figcaption>
+          </figure>
+          <figure>
+            <button class="shot portrait" type="button" data-full="img/r1-camera-mount.jpg" data-title="Printed camera mount"><img src="img/r1-camera-mount.jpg" width="787" height="1400" alt="Blue 3D printed camera housing with a black camera on a curved white printed mount, sitting on a desk" loading="lazy"></button>
+            <figcaption>Printed camera mount</figcaption>
+          </figure>
+        </div></div>
+        <div class="body">
+          <p class="tag">Robotics · CAD · Software</p>
+          <h3>Unitree R1 Humanoid</h3>
+          <p class="d">Head mounts for cameras and ROS 2 motion control on the Unitree R1 humanoid.</p>
+          <ul class="bullets">
+            <li>Developed different mounts for the head of the humanoid to hold cameras</li>
+            <li>Used ROS 2 for precise joint control and synchronized movements such as walking and standing up</li>
+            <li>Created programs that use API keys to give the robot voice-commanded movements</li>
+          </ul>
+        </div>
+      </article>
+      <article class="block">
+        <div class="media"><div class="quad r1">
+          <figure class="wide land">
+            <video controls muted playsinline loop preload="metadata" poster="img/vr-session-poster.jpg" src="img/vr-session.mp4" aria-label="A simulated R1 humanoid seen from behind on a grid floor in Isaac Sim, raising its arms as the operator moves in the headset"></video>
+            <figcaption>Headset view in Isaac Sim</figcaption>
+          </figure>
+          <figure class="wide land">
+            <video controls muted playsinline loop preload="metadata" poster="img/r1-training-poster.jpg" src="img/r1-training.mp4" aria-label="Dozens of simulated R1 humanoids on a grid floor early in walking policy training, many still wobbling"></video>
+            <figcaption>Walking policy training, iteration 100 (2x)</figcaption>
+          </figure>
+        </div></div>
+        <div class="body">
+          <p class="tag">Robotics · VR · Software</p>
+          <h3>R1 VR Teleoperation</h3>
+          <p class="d">A Meta Quest 1 headset that drives the Unitree R1 humanoid's arms, head and walking, tested in Isaac Sim.</p>
+          <ul class="bullets">
+            <li>Built a WebXR page for the Quest 1 that streams head and hand tracking to a PC, which turns it into arm, waist and head joint commands for the R1 using inverse kinematics</li>
+            <li>Trained a walking policy in Isaac Lab with reinforcement learning so the R1 steps when the operator steps and stays balanced while the arms move</li>
+            <li>Added safety checks, including an arm self-collision guard, a hold when hand tracking drops and an e-stop</li>
+            <li>Ran the full system with the headset in Isaac Sim without falls; testing on the real robot is still to come</li>
+          </ul>
+        </div>
+      </article>
+      <article class="block">
+        <div class="media"><div class="quad r1">
+          <figure>
+            <button class="shot" type="button" data-full="img/jetson-case-prints.jpg" data-title="Jetson Nano casings, printed"><img src="img/jetson-case-prints.jpg" width="1600" height="1200" alt="Two 3D printed cases with the Oxmaint AI logo, a black one with a window and an orange one with vent slots" loading="lazy"></button>
+            <figcaption>Printed cases</figcaption>
+          </figure>
+          <figure>
+            <button class="shot" type="button" data-full="img/oxmaint-plate.jpg" data-title="Printed Oxmaint AI plate"><img src="img/oxmaint-plate.jpg" width="1600" height="1200" alt="Black 3D printed plate with the Oxmaint AI bull logo, two vertical slots and four corner mounting holes" loading="lazy"></button>
+            <figcaption>Printed plate</figcaption>
+          </figure>
+          <figure class="wide">
+            <button class="shot sheet" type="button" data-full="img/jetson-nano-casing.png" data-title="NVIDIA Jetson Nano Casing drawing"><img src="img/jetson-nano-casing.png" width="2400" height="1855" alt="Engineering drawing of the NVIDIA Jetson Nano casing" loading="lazy"></button>
+            <figcaption>Casing drawing</figcaption>
+          </figure>
+        </div></div>
+        <div class="body">
+          <p class="tag">Robotics · CAD · Enclosure</p>
+          <h3>Jetson Nano Casing</h3>
+          <p class="d">Printed enclosures for an NVIDIA Jetson Nano in black and orange, with the Oxmaint AI logo.</p>
+          <ul class="bullets">
+            <li>Designed and 3D printed enclosures for an NVIDIA Jetson Nano, branded with the Oxmaint AI logo</li>
+            <li>Made two versions: a black case with a window and an orange case with vent slots</li>
+            <li>Documented the design in a third-angle engineering drawing at 1:1 scale</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- PERSONAL -->
+<div class="view" data-view="personal" hidden>
+  <div class="wrap">
+    <div class="view-head">
+      <a class="back" href="#home">← All projects</a>
+      <p class="label">Electronics</p>
+      <h1 class="title">Personal Projects</h1>
+      <p class="lede">Custom circuit boards and robotics builds.</p>
+    </div>
+    <div class="stack">
+      <article class="block">
+        <div class="media">
+          <div class="clip"><video controls playsinline loop preload="metadata" poster="img/firetruck-drive-poster.jpg" src="img/firetruck-drive.mp4" aria-label="The RC firetruck driving across a table, controlled with a PS5 controller"></video></div>
+          <div class="thumbs lg">
+            <button class="shot" type="button" style="grid-column:1/-1;aspect-ratio:4/3" data-full="img/firetruck-pcb.jpg" data-title="Firetruck control PCB"><img src="img/firetruck-pcb.jpg" width="1600" height="1200" alt="Green custom PCB with an ESP32 DevKit, XT60 connector, buck converter, stepper connector, buzzer and four LEDs" loading="lazy"></button>
+            <button class="shot" type="button" style="grid-column:1/-1;aspect-ratio:1/1" data-full="img/firetruck-bench.jpg" data-title="Bench test with the PS5 controller"><img src="img/firetruck-bench.jpg" style="object-position:50% 50%" width="720" height="1280" alt="The board wired to a stepper, two drive motors and a battery on a bench, with a PS5 controller and the LED board in hand" loading="lazy"></button>
+          </div>
+        </div>
+        <div class="body">
+          <p class="tag">Electronics · PCB design</p>
+          <h3>RC Firetruck</h3>
+          <p class="d">A remote controlled firetruck on a custom KiCad board, driven by an ESP32 and a PS5 controller.</p>
+          <ul class="bullets">
+            <li>Created a custom CAD model of a firetruck and 3D printed it to serve as the chassis</li>
+            <li>Developed a PCB that handles signal connections and power distribution to a variety of components:
+              <ul>
+                <li>Motor drivers (TB6612FNG, ULN2003A)</li>
+                <li>DC motors</li>
+                <li>Stepper motor</li>
+                <li>LEDs</li>
+                <li>Passive buzzer</li>
+                <li>ESP32 microcontroller</li>
+                <li>Voltage converters (5 V and 3.3 V)</li>
+              </ul>
+            </li>
+            <li>Used capacitors, inductors and diodes to smooth the power supply across the board and reduce the risk of damaging components</li>
+            <li>Hand soldered everything on the board, including the 0402 SMD components</li>
+            <li>Connected a PS5 controller to the ESP32 over Bluetooth and wrote the code in Arduino IDE, then flashed it to the microcontroller</li>
+          </ul>
+        </div>
+      </article>
+      <article class="block flip">
+        <div class="media"><div class="quad r1">
+          <figure class="wide">
+            <button class="shot sheet" type="button" data-full="img/robot-arm-cad.jpg" data-title="Robotic arm CAD model"><img src="img/robot-arm-cad.jpg" width="1138" height="888" alt="CAD model of the robotic arm: a light blue arm with black servos at each joint and a two-finger gripper on a blue square base" loading="lazy"></button>
+            <figcaption>OnShape model</figcaption>
+          </figure>
+          <figure class="wide">
+            <button class="shot portrait" type="button" data-full="img/robot-arm.jpg" data-title="Robotic arm, printed"><img src="img/robot-arm.jpg" width="1200" height="1600" alt="Red 3D printed robotic arm with black servos, a pink-labeled servo and a two-finger gripper, wired up on a workbench" loading="lazy"></button>
+            <figcaption>Printed and assembled</figcaption>
+          </figure>
+          <figure class="wide">
+            <button class="shot sheet" type="button" data-full="img/robot-arm-schematic.png" data-title="Robotic arm KiCad schematic"><img src="img/robot-arm-schematic.png" width="1516" height="1031" alt="KiCad schematic of the arm's power board: ESP32 connectors, reverse polarity protection, 3.3 V and 6 V buck converters, five servo connectors and a TMC2209 stepper driver" loading="lazy"></button>
+            <figcaption>KiCad schematic</figcaption>
+          </figure>
+        </div></div>
+        <div class="body">
+          <p class="tag">Robotics · 3D printing</p>
+          <h3>Robotic Arm</h3>
+          <p class="d">A 3D printed arm with servo joints and a gripper, modeled in OnShape and powered by a custom KiCad board that is still in design.</p>
+          <ul class="bullets">
+            <li>Recently started project</li>
+            <li>Modeled the entire arm in OnShape, using mates and motor imports to check that it moves properly</li>
+            <li>Removed material from non-stressed and under-stressed parts to reduce the torque the motors need</li>
+            <li>Assembled the arm after 3D printing, using printed axles for movement and fasteners to lock the motors in place</li>
+            <li>Uses one NEMA stepper motor, four large MG995 servos and one MG90 servo</li>
+            <li>Created the schematic for a power distribution PCB that supplies the motors and the ESP32 microcontroller</li>
+            <li>Plans to manufacture and assemble the PCB, then add ROS 2 and other libraries to expand what the arm can do</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="view" data-view="skills" hidden>
+  <header class="hero slim band">
+    <div class="wrap">
+      <a class="back" href="#home">← All projects</a>
+      <p class="eyebrow">Capabilities</p>
+      <h1>Skills</h1>
+      <p class="hero-sub">Tools and methods I use across the projects.</p>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="stack">
+      <div class="skillgrid">
+        <section class="skillbox">
+          <h3>CAD and Drawing</h3>
+          <ul class="chips"><li>OnShape Associate</li><li>Assemblies with Mates</li><li>Third-Angle Engineering Drawings</li><li>Print Tolerances and Clearances</li><li>Weight and Torque Optimization</li></ul>
+        </section>
+        <section class="skillbox">
+          <h3>Electronics</h3>
+          <ul class="chips"><li>KiCad Schematics and PCB Layout</li><li>Power Supply Design</li><li>Hand Soldering</li><li>ESP32 and Arduino IDE</li><li>Motor and Stepper Drivers</li></ul>
+        </section>
+        <section class="skillbox">
+          <h3>Fabrication</h3>
+          <ul class="chips"><li>FDM 3D Printing</li><li>Laser Cutting and Engraving</li><li>CNC Fabrication</li><li>Assembly and Fastening</li></ul>
+        </section>
+        <section class="skillbox">
+          <h3>Software</h3>
+          <ul class="chips"><li>ROS 2</li><li>Isaac Sim</li><li>Computer Vision (YOLO11n, HSV)</li><li>Jetson Orin Nano</li></ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>© 2026 Parth Gupta · Engineering Portfolio</p>
+    <p>Denmark High School · Class of 2028</p>
+  </div>
+</footer>
+
+<dialog id="viewer" aria-label="Enlarged image">
+  <div class="dlg">
+    <div class="bar"><span id="viewer-title"></span><button type="button" id="viewer-close">Close</button></div>
+    <img id="viewer-img" alt="">
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var pages = ['home', 'tsa', 'prints', 'oxmaint', 'personal', 'skills'];
+  var views = document.querySelectorAll('.view');
+  var links = document.querySelectorAll('.nav-links a');
+
+  function fromHash() {
+    var h = (location.hash || '').replace(/^#/, '');
+    return pages.indexOf(h) > -1 ? h : 'home';
+  }
+  var cur = fromHash();
+  function route() {
+    var h = cur;
+    views.forEach(function (v) { v.hidden = v.getAttribute('data-view') !== h; });
+    links.forEach(function (a) {
+      var t = a.getAttribute('href').slice(1);
+      if (t === h) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    window.scrollTo(0, 0);
+    var sw = document.getElementById('sweep');
+    if (sw) { sw.classList.remove('go'); void sw.offsetWidth; sw.classList.add('go'); }
+  }
+  var curtain = document.getElementById('curtain');
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var busy = false;
+  function go(target) {
+    if (target === cur) return;
+    cur = target;
+    if (target === 'home' || reduce || !curtain || busy) { route(); return; }
+    busy = true;
+    curtain.setAttribute('data-for', target);
+    curtain.classList.remove('out');
+    curtain.classList.add('on');
+    setTimeout(function () {
+      route();
+      curtain.classList.add('out');
+      setTimeout(function () {
+        curtain.classList.remove('on', 'out');
+        busy = false;
+      }, 520);
+    }, 1150);
+  }
+  window.addEventListener('hashchange', function () { go(fromHash()); });
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var t = a.getAttribute('href').slice(1);
+    if (pages.indexOf(t) < 0) return;
+    e.preventDefault();
+    try { location.hash = t; } catch (x) {}
+    go(t);
+  });
+  route();
+
+  var dlg = document.getElementById('viewer');
+  var img = document.getElementById('viewer-img');
+  var title = document.getElementById('viewer-title');
+  document.querySelectorAll('.shot[data-full]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      img.src = b.getAttribute('data-full');
+      img.alt = b.getAttribute('data-title') || '';
+      title.textContent = b.getAttribute('data-title') || '';
+      try { dlg.showModal(); } catch (e) { dlg.setAttribute('open', ''); }
+    });
+  });
+  document.getElementById('viewer-close').addEventListener('click', function () {
+    if (dlg.close) dlg.close(); else dlg.removeAttribute('open');
+  });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg && dlg.close) dlg.close(); });
+})();
+</script>
+
+</body>
+</html>
